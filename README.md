@@ -7,12 +7,15 @@ Rather than futzing with all of the python dependencies to get the openstack cli
 
 ```bash
 docker pull jmcvea/openstack-client
+
 # $(PWD) is mounted to allow for actions requiring host filesystem access.  
-# See 'Implementation Notes' below
+# See 'Tips' section below
 docker run -ti --rm -v $(PWD):/data jmcvea/openstack-client
+
 # source the rc config file
 $ source /data/openrc.sh
 ```
+
 
 ## Manual Build
 Clone this repository, then:
@@ -30,6 +33,7 @@ docker run -it -v $(PWD):/data openstack-client
 $ source /data/openrc.sh
 ```
 
+
 ## Tips
 
 ### Accessing a host directory
@@ -42,12 +46,14 @@ in the `/data` folder when using the `--rm` command line option.  Example:
 docker run -it --rm -v $(PWD):/data --env-file ${RC_ENV_FILE:-~/.osc_rc.env} jmcvea/openstack-client openstack image save --file /data/test_image.img ${IMAGE_GUID}
 ```
 
+
 ### Run one-off commands
 Run individual commands easily by passing them as the command to run and overriding the default `/bin/sh` command.  For one-off commands, it's a good practice to remove the container with the `--rm` argument so that you don't collect a bunch of orphaned containers.  You will also want to ensure that the rc environment is configured as part of starting the container -- easiest via a .env file containing the openstack rc env vars.
 
 ```bash
 docker run -ti --rm -v $(PWD):/data --env-file ${RC_ENV_FILE:-~/.osc_rc.env} jmcvea/openstack-client cinder list`
 ```
+
 
 ### Simplify your typing with aliases
 ```bash
@@ -57,6 +63,7 @@ alias oscsh='docker run -ti --rm -v $(PWD):/data --env-file ${RC_ENV_FILE:-~/.os
 alias openstack='oscsh openstack'
 ```
 
+
 ## Contributing
 
 1. Fork ( http://github.com/jmcvea/git-contributors/fork )
@@ -64,6 +71,7 @@ alias openstack='oscsh openstack'
 3. Commit changes (`git commit -am 'Adding a great new feature'`)
 4. Push to the branch (`git push origin new-feature`)
 5. Create a new Pull Request
+
 
 ## Copyright
 
