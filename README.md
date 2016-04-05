@@ -7,7 +7,7 @@ Rather than futzing with all of the python dependencies to get the openstack cli
 
 ```bash
 docker pull jmcvea/openstack-client
-# $(PWD) is mounted to allow for actions requiring host filesystem access.  
+# $(PWD) is mounted to allow for actions requiring host filesystem access.
 # See 'Implementation Notes' below
 docker run -ti --rm -v $(PWD):/data jmcvea/openstack-client
 # source the rc config file
@@ -34,7 +34,7 @@ $ source /data/openrc.sh
 
 ### Accessing a host directory
 The `/data` directory is exposed as a VOLUME that can be mounted.  This is convenient for openstack
-commands that might require reading/writing host filesystems.  It is important to remember that 
+commands that might require reading/writing host filesystems.  It is important to remember that
 commands such as `openstack image save` should ensure that the location where the image is saved is
 in the `/data` folder when using the `--rm` command line option.  Example:
 
@@ -59,7 +59,7 @@ alias openstack='oscsh openstack'
 
 ## Contributing
 
-1. Fork ( http://github.com/jmcvea/git-contributors/fork )
+1. Fork ( http://github.com/jmcvea/docker-openstack-client/fork )
 2. Create a feature branch (`git checkout -b new-feature`)
 3. Commit changes (`git commit -am 'Adding a great new feature'`)
 4. Push to the branch (`git push origin new-feature`)
