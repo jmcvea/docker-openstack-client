@@ -7,16 +7,17 @@ LABEL Description="Provides openstack client tools" Version="0.1"
 # Alpine-based installation
 # #########################
 RUN apk add --update \
-  # bash \
   python-dev \
   py-pip \
   py-setuptools \
   ca-certificates \
   gcc \
+  libffi-dev \
+  openssl-dev \
   musl-dev \
   linux-headers \
   && pip install --upgrade --no-cache-dir pip setuptools python-openstackclient \
-  && apk del gcc musl-dev linux-headers \
+  && apk del gcc musl-dev linux-headers libffi-dev openssl-dev \
   && rm -rf /var/cache/apk/*
 
 # Add a volume so that a host filesystem can be mounted 
