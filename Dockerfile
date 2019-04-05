@@ -2,7 +2,7 @@ FROM alpine:latest
 
 MAINTAINER Jim McVea <jmcvea@gmail.com>
 
-LABEL Description="Provides openstack client tools" Version="0.1"
+LABEL Description="Provides openstack client tools" Version="0.2"
 
 # Alpine-based installation
 # #########################
@@ -16,7 +16,7 @@ RUN apk add --update \
   openssl-dev \
   musl-dev \
   linux-headers \
-  && pip install --upgrade --no-cache-dir pip setuptools python-openstackclient \
+  && pip install --upgrade --no-cache-dir pip setuptools python-openstackclient python-heatclient \
   && apk del gcc musl-dev linux-headers libffi-dev \
   && rm -rf /var/cache/apk/*
 
