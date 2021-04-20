@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.13.5
 
 MAINTAINER Jim McVea <jmcvea@gmail.com>
 
@@ -7,19 +7,20 @@ LABEL Description="Provides openstack client tools" Version="0.1"
 # Alpine-based installation
 # #########################
 RUN apk add --update \
-  python-dev \
+  python3-dev \
   py-pip \
-  py-setuptools \
   ca-certificates \
   gcc \
   libffi-dev \
   openssl-dev \
   musl-dev \
   linux-headers \
-  && pip install --upgrade --no-cache-dir pip setuptools \
-  && pip install python-openstackclient \
-  && apk del gcc musl-dev linux-headers libffi-dev \
-  && rm -rf /var/cache/apk/*
+  cargo \
+  && pip install --upgrade --no-cache-dir pip setuptools
+RUN pip install cryptography
+RUN pip install python-openstackclient==5.2.1
+#  && apk del gcc musl-dev linux-headers python-dev libffi-dev \
+#  && rm -rf /var/cache/apk/*
 
 # Add a volume so that a host filesystem can be mounted
 # Ex. `docker run -v $PWD:/data jmcvea/openstack-client`
